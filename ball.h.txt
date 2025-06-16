@@ -1,0 +1,25 @@
+//ball.h
+#pragma once
+#include<SFML/Graphics.hpp>
+using namespace sf;
+
+class Ball{
+    private:
+    Vector2f m_position;
+    CircleShape m_Shape;
+
+    float m_Speed = 1000.f;
+    float m_directionX = .2f;
+    float m_directionY = .2f;
+
+    public:
+    Ball(float startX, float startY);
+
+    FloatRect get_Position();
+    CircleShape get_Shape();
+    float getXVelocity();
+    void reboundSides();
+    void reboundBatOrTop();
+    void reboundBottom();
+    void update(Time dt);
+};

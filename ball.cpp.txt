@@ -1,0 +1,50 @@
+//ball.cpp
+#include "ball.h"
+using namespace sf;
+
+
+//constructor func
+Ball::Ball(float startX, float startY)
+{
+    m_position.x= startX;
+    m_position.y= startY;
+    m_Shape.setRadius(10.0);
+    m_Shape.setPosition(m_position);
+}
+
+FloatRect Ball::get_Position()
+{
+    return m_Shape.getGlobalBounds();
+}
+
+CircleShape Ball::get_Shape()
+{
+    return m_Shape;
+}
+
+float Ball::getXVelocity()
+{
+    return m_directionX;
+}
+void Ball::reboundSides()
+{
+    m_directionX =- m_directionX;
+}
+void Ball::reboundBatOrTop()
+{
+    m_directionY =- m_directionY;
+}
+void Ball::reboundBottom()
+{
+    m_position.y = 0;
+    m_position.x = 500;
+    m_directionY =- m_directionY;
+}
+
+void Ball::update(Time dt)
+{
+    m_position.x += m_directionX * m_Speed * dt.asSeconds();
+    m_position.y += m_directionY * m_Speed * dt.asSeconds();
+
+    m_Shape.setPosition(m_position);
+}
